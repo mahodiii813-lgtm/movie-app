@@ -3,30 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie App - DAG 1</title>
+    <title>Movie App - DAG 2</title>
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
     <header>
       <h1>Movie App</h1>
-      <p>DAG 1: Lær JavaScript med Klik-tæller</p>
+      <p>DAG 2: Arrays, Loops & Film-lister</p>
     </header>
 
     <main>
-      <section class="counter-box" aria-labelledby="counter-title">
-        <h2 id="counter-title">Klik Tæller</h2>
-        <p class="instructions">Øv dig med klik events mens vi bygger fundamentet til vores Movie App!</p>
+      <section  id="movie-list" class="movie-grid" aria-label="filmliste">
+          <! film vises her med JavaScript -->
+        <article class="movie-card">
+          <div> class="movie-info"> </div>
+          <h3>inception</h3>
+          <p>År: 2010</p>
+          </div>
+  </article>
+  <article class="movie-card">
+    <div class="movie-info">
+      <h3>The Matrix</h3>
+      <p>År: 1999</p>
+    </div>
+  </article>
+  <article class="movie-card">
+    <div class="movie-info">
+      <h3>Interstellar</h3>
+      <p>År: 2014</p>
+    </div>
+  </article>
+</section>
+          <img src="https://via.placeholder.com/300x450" alt="Film plakat"/>
+          
+          <p>
+        <h2 id="counter-title"></h2>
+        <p class="instructions"></p>
 
-        <div class="count-display">Antal klik: <span id="counter">4</span></div>
+        <div class="count-display"> <span id="counter"></span></div>
 
-        <button id="click-button">KEKA</button>
-        <button id="reset-button">Nulstil</button>
-        <button id="click-button">plus</button>
-        <button id="minus-button">minus</button>
+        <button id="click-button"></button>
+        <button id="reset-button"></button>
+        <button id="click-button"></button>
+        <button id="minus-button"></button>
       </section>
     </main>
 
     <script src="app.js"></script>
   </body>
 </html>
-<

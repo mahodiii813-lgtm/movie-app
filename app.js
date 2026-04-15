@@ -1,70 +1,32 @@
 "use strict";
 
-console.log("klik tæller starter !");
 
-const counter = document.querySelector("#counter");
-const clickButton = document.querySelector("#click-button");
-const resetButton = document.querySelector("#reset-button");
-const countDisplay = document.querySelector("#counter");
-const clickbutton=document.querySelector("#click-button");
-const resetbutton=document.querySelector("#reset-button");
-console.log(countDisplay);
-console.log(clickButton);
-console.log(resetButton);
+console.log("Movie App - DAG 2 starter...");
 
-let count = 10;
-count = count+1;
-countDisplay.textContent = count;
 
-clickButton.addEventListener("click", function() {
-  count=count+1;
+const movie1="inception";
+const movie2="the matrix";
+const movie3="interstellar";
 
-  countDisplay.textContent = count;
-if(count>10){
-  countDisplay.style.color= "lightgreen";
-}
-});
 
-resetButton.addEventListener("click", function () {
-  count = 0;
-  countDisplay.textContent
-  = count;
-if(count>10){
-  countDisplay.style.color= "lightgreen";
+
+"use strict";
+console.log("Movie App starter...");
+
+const movies=["inception","the matrix","interstellar", "the dark knight", "Pulp Fiction"];
+
+
+console.log("alle film:", movies);
+
+console.log("Første film:", movies[0]);
+console.log("Anden film:", movies[1]);
+console.log("Sidste film:", movies[3]);
+console.log("Sidste film:", movies[10]);
+
+for (const movie of movies) {
+  console.log("Nu viser vi:", movie);
 }
 
 
-});
-    const minusButton=document.querySelector("#minus-button");
-    minusButton.addEventListener("click", function () {
-      count=count-1;
-      countDisplay.textContent = count;
-    });
 
-    clickButton.addEventListener("click", function () {
-      count=count+1;
-      countDisplay.textContent = count;
-      if(count=== 10){
-        alert("Tilykke! du nåede 10 klik!");
-      }
-    });
-    function increaseCount(){
-        count=count+1;
-        countDisplay.textContent = count;
-    }
-    function decreaseCount(){
-        count=count-1
-        countDisplay.textContent = count;
-    }
-
-    function resetCount(){
-        count=0;
-        countDisplay.textContent = count;
-    }
-
-    clickButton.addEventListener("click", increaseCount);
-    minusButton.addEventListener("click", decreaseCount);
-    resetButton.addEventListener("click", resetCount);
-    
-    
-m
+console.log("Antal film:", movies.length);
