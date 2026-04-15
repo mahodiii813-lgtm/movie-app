@@ -23,8 +23,19 @@ console.log("Anden film:", movies[1]);
 console.log("Sidste film:", movies[3]);
 console.log("Sidste film:", movies[10]);
 
+const movieList = document.querySelector("#movie-list");
+console.log(movieList);
+
 for (const movie of movies) {
-  console.log("Nu viser vi:", movie);
+  const html = /* html */ `
+    <article class="movie-card">
+      <div class="movie-info">
+        <h3>${movie}</h3>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
 }
 
 
