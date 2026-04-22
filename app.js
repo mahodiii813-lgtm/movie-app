@@ -3,8 +3,12 @@
 const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
+
 const movieList = document.querySelector("#movie-list");
 const genreSelect = document.querySelector("#genre-select");
+const searchInput = document.querySelector("#search-input");
+const sortSelect = document.querySelector("#sort-select");
+const movieCount = document.querySelector("#movie-count");
 
 fetchMovies();
 
@@ -13,9 +17,7 @@ async function fetchMovies() {
   allMovies = await response.json();
 
   populateGenreSelect();
-  showMovies(allMovies);
-
-  genreSelect.addEventListener("change", applyGenreFilter);
+  applyFiltersAndSort();
 }
 
 function populateGenreSelect() {
@@ -26,8 +28,10 @@ function populateGenreSelect() {
       genres.add(genre);
     }
   }
-const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
-  for (const genre of genres) {
+
+  const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+
+  for (const genre of sortedGenres) {
     genreSelect.insertAdjacentHTML(
       "beforeend",
       `<option value="${genre}">${genre}</option>`,
@@ -35,17 +39,61 @@ const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
   }
 }
 
-function applyGenreFilter() {
+function applyFiltersAndSort() {
   const selectedGenre = genreSelect.value;
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const sortOption = sortSelect.value;
 
-  if (selectedGenre === "all") {
-    showMovies(allMovies);
-    return;
-  }
+  let filteredMovies = allMovies.filter(function (movie) {
+    const matchesGenre =
+      selectedGenre === "all" || movie.genre.includes(selectedGenre);
+    const matchesSearch = movie.title.toLowerCase().includes(searchValue);
 
-  const filteredMovies = allMovies.filter(function (movie) {
-    return movie.genre.includes(selectedGenre);
+    return matchesGenre && matchesSearch;
   });
+
+  if (sortOption === "title") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieA.title.localeCompare(movieB.title);
+    });
+  } else if (sortOption === "year") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.year - movieA.year;
+    });
+  } else if (sortOption === "rating") {
+    filteredMovies.sort(function (movieA, movieB) {
+      return movieB.rating - movieA.rating;
+    });
+  }
 
   showMovies(filteredMovies);
 }
+
+function showMovies(movies) {
+  movieList.innerHTML = "";
+  movieCount.textContent = `Viser ${movies.length} film`;
+
+  for (const movie of movies) {
+    showMovie(movie);
+  }
+}
+
+function showMovie(movie) {
+  const html = /* html */ `
+    <article class="movie-card">
+      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
+      <div class="movie-info">
+        <h3>${movie.title}</h3>
+        <p>År: ${movie.year}</p>
+        <p>Rating: ${movie.rating}</p>
+        <p class="genre">${movie.genre.join(", ")}</p>
+      </div>
+    </article>
+  `;
+
+  movieList.insertAdjacentHTML("beforeend", html);
+}
+
+genreSelect.addEventListener("change", applyFiltersAndSort);
+searchInput.addEventListener("input", applyFiltersAndSort);
+sortSelect.addEventListener("change", applyFiltersAndSort);

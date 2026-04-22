@@ -9,25 +9,37 @@
   <body>
     <header>
       <h1>Movie App</h1>
-      <p>DAG 2: Arrays, Loops & Film-lister</p>
+      <p>DAG 3: Arrays, Loops & Film-lister</p>
     </header>
-    <section class="controls">
-  <label for="genre-select">Genre</label>
-  <select id="genre-select">
-    <option value="all">Alle genrer</option>
-  </select>
-</section>
+
 <section class="controls">
+
   <section class="controls">
-  <div class="genre-row">
+  <div class="control-group">
+    <label for="search-input">Søg på titel</label>
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Fx matrix, dune eller dark"
+    />
+  </div>
+
+  <div class="control-group">
+    <div class="control-group">
+  <label for="sort-select">Sortering</label>
+  <select id="sort-select">
+    <option value="none">Ingen sortering</option>
+    <option value="title">Titel (A-Å)</option>
+    <option value="year">Årstal (nyeste først)</option>
+    <option value="rating">Rating (højeste først)</option>
+  </select>
+</div>
     <label for="genre-select">Genre</label>
     <select id="genre-select">
       <option value="all">Alle genrer</option>
     </select>
-    <span id="movie-count" class="movie-count"></span>
   </div>
 </section>
-
   <div class="genre-row">
     <label for="genre-select">Genre</label>
     <select id="genre-select">
@@ -40,20 +52,7 @@
     <main>
        <section id="movie-list" class="movie-grid" aria-label="Filmliste">
       <!-- Film vises her med JavaScript -->
-       </section>
-          <img src="https://via.placeholder.com/300x450" alt="Film plakat"/>
-          
-          <p>
-        <h2 id="counter-title"></h2>
-        <p class="instructions"></p>
 
-        <div class="count-display"> <span id="counter"></span></div>
-
-        <button id="click-button"></button>
-        <button id="reset-button"></button>
-        <button id="click-button"></button>
-        <button id="minus-button"></button>
-      </section>
     </main>
 
     <script src="app.js"></script>
