@@ -4,6 +4,7 @@ const MOVIES_URL =
   "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/movies.json";
 let allMovies = [];
 const movieList = document.querySelector("#movie-list");
+const genreSelect = document.querySelector("#genre-select");
 
 fetchMovies();
 
@@ -11,31 +12,40 @@ async function fetchMovies() {
   const response = await fetch(MOVIES_URL);
   allMovies = await response.json();
 
+  populateGenreSelect();
   showMovies(allMovies);
+
+  genreSelect.addEventListener("change", applyGenreFilter);
 }
 
-function showMovies(movies) {
-  movieList.innerHTML = "";
+function populateGenreSelect() {
+  const genres = new Set();
 
-  for (const movie of movies) {
-    showMovie(movie);
+  for (const movie of allMovies) {
+    for (const genre of movie.genre) {
+      genres.add(genre);
+    }
+  }
+const sortedGenres = [...genres].sort((a, b) => a.localeCompare(b));
+  for (const genre of genres) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${genre}">${genre}</option>`,
+    );
   }
 }
 
-function showMovie(movie) {
-  const html = /* html */ `
-    <article class="movie-card">
-      <img class="movie-image" src="${movie.image}" alt="${movie.title}">
-      <div class="movie-info">
-        <h3>${movie.title}</h3>
-        <p>År: ${movie.year}</p>
-        <p>Rating: ${movie.rating}</p>
-      </div>
-    </article>
-  `;
+function applyGenreFilter() {
+  const selectedGenre = genreSelect.value;
 
-  movieList.insertAdjacentHTML("beforeend", html);
+  if (selectedGenre === "all") {
+    showMovies(allMovies);
+    return;
+  }
+
+  const filteredMovies = allMovies.filter(function (movie) {
+    return movie.genre.includes(selectedGenre);
+  });
+
+  showMovies(filteredMovies);
 }
-
-
-
